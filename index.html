@@ -16,6 +16,8 @@
     --ok:#3ddc84;
     --ok-dim:rgba(61,220,132,.12);
     --gold:#ffcb3e;
+    --mega:#c96bff;
+    --mega-dim:rgba(201,107,255,.14);
     --ink:#eef1ff;
     --ink-dim:#9aa3c7;
     --display:'Barlow Condensed',sans-serif;
@@ -70,16 +72,16 @@
   }
 
   /* ---------- RULES ---------- */
-  .rules{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:26px}
-  @media(max-width:760px){.rules{grid-template-columns:1fr}}
+  .rules{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-top:26px}
+  @media(max-width:860px){.rules{grid-template-columns:1fr}}
   .card{
     border:1px solid var(--line);border-radius:16px;
     background:var(--arena-2);padding:22px 22px 16px;
   }
   .card h2{
     font-family:var(--display);font-weight:800;font-style:italic;
-    text-transform:uppercase;font-size:26px;letter-spacing:.04em;
-    display:flex;align-items:center;gap:10px;margin-bottom:14px;
+    text-transform:uppercase;font-size:24px;letter-spacing:.04em;
+    display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;
   }
   .tag{
     font-family:var(--body);font-style:normal;font-size:11px;font-weight:700;
@@ -91,32 +93,34 @@
   .card.ok .tag{background:var(--ok-dim);color:var(--ok);border:1px solid var(--ok)}
   .card ul{list-style:none}
   .card li{
-    padding:11px 0 11px 30px;position:relative;
+    padding:10px 0 10px 30px;position:relative;
     border-top:1px solid var(--line);
-    font-size:15px;line-height:1.45;
+    font-size:14.5px;line-height:1.45;
   }
   .card li strong{font-weight:600;color:#fff}
-  .card li span{color:var(--ink-dim);font-size:13px;display:block}
+  .card li span{color:var(--ink-dim);font-size:12.5px;display:block}
   .card li::before{
-    position:absolute;left:0;top:12px;
-    font-weight:800;font-size:14px;
+    position:absolute;left:0;top:11px;
+    font-weight:800;font-size:13px;
     width:20px;height:20px;border-radius:50%;
     display:flex;align-items:center;justify-content:center;
   }
   .card.ban li::before{content:"✕";color:var(--ban);background:var(--ban-dim)}
   .card.ok li::before{content:"✓";color:var(--ok);background:var(--ok-dim)}
 
-  /* ---------- BANNED POKEMON ---------- */
-  .banned{margin-top:34px}
-  .banned-head{
-    display:flex;align-items:center;gap:14px;margin-bottom:18px;
-  }
-  .banned-head h2{
+  /* ---------- SECTION HEADS ---------- */
+  .section-head{display:flex;align-items:center;gap:14px;margin:38px 0 6px}
+  .section-head h2{
     font-family:var(--display);font-weight:800;font-style:italic;
     text-transform:uppercase;font-size:34px;color:#fff;letter-spacing:.03em;
     white-space:nowrap;
   }
-  .banned-head .rule-line{flex:1;height:2px;background:linear-gradient(90deg,var(--ban),transparent)}
+  .section-head .rule-line{flex:1;height:2px}
+  .section-head.red .rule-line{background:linear-gradient(90deg,var(--ban),transparent)}
+  .section-head.purple .rule-line{background:linear-gradient(90deg,var(--mega),transparent)}
+  .section-note{color:var(--ink-dim);font-size:13px;margin-bottom:16px}
+
+  /* ---------- BANNED GRID ---------- */
   .grid{
     display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;
   }
@@ -137,26 +141,38 @@
     font-family:var(--display);font-weight:800;text-transform:uppercase;
     letter-spacing:.06em;font-size:17px;margin-top:6px;
   }
+  .rank{
+    position:absolute;top:8px;right:10px;
+    font-family:var(--display);font-weight:800;font-style:italic;
+    font-size:18px;color:rgba(255,255,255,.22);
+  }
   .ribbon{
     position:absolute;top:14px;left:-38px;transform:rotate(-35deg);
     background:var(--ban);color:#fff;font-size:10px;font-weight:800;
     letter-spacing:.18em;padding:3px 42px;
   }
-  .mon.mega{
-    grid-column:1 / -1;display:flex;align-items:center;gap:18px;
-    text-align:left;padding:16px 22px;
+  .mon.megamon:hover{border-color:var(--mega)}
+  .mon.megamon .ribbon{background:var(--mega)}
+  .mon.megamon .sub-name{color:var(--ink-dim);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+
+  /* ---------- MEGA RULE CARD ---------- */
+  .mega-rule{
+    margin-top:18px;display:flex;align-items:center;gap:18px;
+    border:1px solid var(--gold);border-radius:14px;
     background:linear-gradient(90deg, rgba(255,203,62,.12), var(--arena-2));
-    border-color:var(--gold);
+    padding:16px 22px;
   }
-  .mon.mega:hover{transform:none;border-color:var(--gold)}
-  .mon.mega .name{color:var(--gold)}
   .mega-stone{
     width:56px;height:56px;border-radius:50%;flex-shrink:0;
     background:conic-gradient(from 40deg,#7be3ff,#c96bff,#ffd76b,#7be3ff);
     box-shadow:0 0 24px #c96bff55, inset 0 0 12px rgba(255,255,255,.5);
   }
-  .mon.mega .name{font-size:22px;margin:0}
-  .mon.mega p{color:var(--ink-dim);font-size:13px;margin-top:2px}
+  .mega-rule .name{
+    font-family:var(--display);font-weight:800;text-transform:uppercase;
+    letter-spacing:.06em;font-size:22px;color:var(--gold);
+  }
+  .mega-rule p{color:var(--ink-dim);font-size:13px;margin-top:2px}
+  .mega-rule p strong{color:#fff}
 
   footer{
     margin-top:34px;text-align:center;color:var(--ink-dim);
@@ -172,7 +188,7 @@
 <div class="wrap">
 
   <header>
-    <div class="eyebrow">Pokémon Champions · Formato de la liga</div>
+    <div class="eyebrow">Pokémon Champions · Regulación M-B</div>
     <h1>Reglamento de Combate</h1>
     <div class="sub">Reglas personalizadas · Válidas para todos los encuentros</div>
     <div class="pokeline"></div>
@@ -180,13 +196,23 @@
 
   <section class="rules">
     <div class="card ban">
-      <h2><span class="tag">Prohibido</span> Restricciones</h2>
+      <h2><span class="tag">Prohibido</span> Movimientos</h2>
       <ul>
-        <li><strong>Choice Scarf</strong><span>Pañuelo Elegido</span></li>
-        <li><strong>Focus Sash / Focus Band</strong><span>Banda Aguante / Cinta Aguante </span></li>
-        <li><strong>Movimientos de seteo de velocidades</strong><span>Viento Afín, Espacio Raro (Trick Room) y similares</span></li>
-        <li><strong>Movimientos de sacrificio y campo</strong><span>Mismo Destino, Canto Mortal (Perish Song), Gravedad y similares</span></li>
-        <li><strong>Movimientos de bloqueo</strong><span>Otra Vez (Encore), Anulación (Disable) y similares</span></li>
+        <li><strong>Viento Afín</strong><span>(Tailwind)</span></li>
+        <li><strong>Espacio Raro</strong><span>(Trick Room)</span></li>
+        <li><strong>Mismo Destino</strong><span>(Destiny Bond)</span></li>
+        <li><strong>Canto Mortal</strong><span>(Perish Song)</span></li>
+        <li><strong>Gravedad</strong><span>(Gravity)</span></li>
+        <li><strong>Otra Vez</strong><span>(Encore)</span></li>
+        <li><strong>Anulación</strong><span>(Disable)</span></li>
+        <li><strong>Cualquier otro que setee velocidades</strong><span>Ej.: Rueda Auxiliar, Truco Defensa</span></li>
+      </ul>
+    </div>
+    <div class="card ban">
+      <h2><span class="tag">Prohibido</span> Objetos</h2>
+      <ul>
+        <li><strong>Pañuelo Elegido</strong><span>(Choice Scarf)</span></li>
+        <li><strong>Banda Focus</strong><span>(Focus Sash)</span></li>
       </ul>
     </div>
     <div class="card ok">
@@ -198,36 +224,56 @@
     </div>
   </section>
 
-  <section class="banned">
-    <div class="banned-head">
-      <h2>Pokémon Baneados</h2>
+  <section>
+    <div class="section-head red">
+      <h2>Pokémon Baneados · Top 20 de uso</h2>
       <div class="rule-line"></div>
     </div>
+    <p class="section-note">Los 20 Pokémon más utilizados de la Regulación M-B (datos de Pikalytics). El baneo incluye todas sus formas y Megas.</p>
     <div class="grid">
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/68.png" alt="Machamp"><div class="name">Machamp</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/417.png" alt="Pachirisu"><div class="name">Pachirisu</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/143.png" alt="Snorlax"><div class="name">Snorlax</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/196.png" alt="Espeon"><div class="name">Espeon</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/748.png" alt="Toxapex"><div class="name">Toxapex</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/902.png" alt="Basculegion"><div class="name">Basculegion</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/983.png" alt="Kingambit"><div class="name">Kingambit</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/441.png" alt="Chatot"><div class="name">Chatot</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1018.png" alt="Archaludon"><div class="name">Archaludon</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/727.png" alt="Incineroar"><div class="name">Incineroar</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/903.png" alt="Sneasler"><div class="name">Sneasler</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/981.png" alt="Farigiraf"><div class="name">Farigiraf</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/547.png" alt="Whimsicott"><div class="name">Whimsicott</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/279.png" alt="Pelipper"><div class="name">Pelipper</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1000.png" alt="Gholdengo"><div class="name">Gholdengo</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/700.png" alt="Sylveon"><div class="name">Sylveon</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/861.png" alt="Grimmsnarl"><div class="name">Grimmsnarl</div></div>
-      <div class="mon"><div class="ribbon">Baneado</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1013.png" alt="Sinistcha"><div class="name">Sinistcha</div></div>
-      <div class="mon mega">
-        <div class="mega-stone"></div>
-        <div>
-          <div class="name">Regla de las Megas: solo UNA por equipo</div>
-          <p>Es muy fácil: elegí <strong style="color:#fff">un solo</strong> Pokémon que pueda hacer Mega Evolución. Ese es tu Mega. Los demás Pokémon de tu equipo <strong style="color:#fff">no pueden</strong> ser de los que hacen Mega, aunque no lleven su piedra. O sea: una Mega y listo, ni una más. 🙂</p>
-        </div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#1</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/445.png" alt="Garchomp"><div class="name">Garchomp</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#2</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1013.png" alt="Sinistcha"><div class="name">Sinistcha</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#3</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/902.png" alt="Basculegion"><div class="name">Basculegion</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#4</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/547.png" alt="Whimsicott"><div class="name">Whimsicott</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#5</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/983.png" alt="Kingambit"><div class="name">Kingambit</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#6</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/398.png" alt="Staraptor"><div class="name">Staraptor</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#7</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/727.png" alt="Incineroar"><div class="name">Incineroar</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#8</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png" alt="Charizard"><div class="name">Charizard</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#9</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/26.png" alt="Raichu"><div class="name">Raichu</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#10</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/279.png" alt="Pelipper"><div class="name">Pelipper</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#11</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/903.png" alt="Sneasler"><div class="name">Sneasler</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#12</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1018.png" alt="Archaludon"><div class="name">Archaludon</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#13</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/861.png" alt="Grimmsnarl"><div class="name">Grimmsnarl</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#14</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/700.png" alt="Sylveon"><div class="name">Sylveon</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#15</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/260.png" alt="Swampert"><div class="name">Swampert</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#16</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/376.png" alt="Metagross"><div class="name">Metagross</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#17</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/981.png" alt="Farigiraf"><div class="name">Farigiraf</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#18</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10061.png" alt="Floette Eterna" onerror="this.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/670.png'"><div class="name">Floette Eterna</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#19</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1000.png" alt="Gholdengo"><div class="name">Gholdengo</div></div>
+      <div class="mon"><div class="ribbon">Baneado</div><div class="rank">#20</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/142.png" alt="Aerodactyl"><div class="name">Aerodactyl</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head purple">
+      <h2>Megas Baneadas</h2>
+      <div class="rule-line"></div>
+    </div>
+    <p class="section-note">Las Mega Evoluciones más usadas del meta M-B. La forma base sigue siendo legal, pero no puede llevar su Megapiedra.</p>
+    <div class="grid">
+      <div class="mon megamon"><div class="ribbon">Sin Mega</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/655.png" alt="Mega Delphox"><div class="name">Delphox</div><div class="sub-name">Mega prohibida</div></div>
+      <div class="mon megamon"><div class="ribbon">Sin Mega</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/658.png" alt="Mega Greninja"><div class="name">Greninja</div><div class="sub-name">Mega prohibida</div></div>
+      <div class="mon megamon"><div class="ribbon">Sin Mega</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10038.png" alt="Mega Gengar"><div class="name">Gengar</div><div class="sub-name">Mega prohibida</div></div>
+      <div class="mon megamon"><div class="ribbon">Sin Mega</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10052.png" alt="Mega Mawile"><div class="name">Mawile</div><div class="sub-name">Mega prohibida</div></div>
+      <div class="mon megamon"><div class="ribbon">Sin Mega</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/701.png" alt="Mega Hawlucha"><div class="name">Hawlucha</div><div class="sub-name">Mega prohibida</div></div>
+      <div class="mon megamon"><div class="ribbon">Sin Mega</div><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png" alt="Mega Venusaur"><div class="name">Venusaur</div><div class="sub-name">Mega prohibida</div></div>
+    </div>
+
+    <div class="mega-rule">
+      <div class="mega-stone"></div>
+      <div>
+        <div class="name">Regla de las Megas: solo UNA por equipo</div>
+        <p>Es muy fácil: elegí <strong>un solo</strong> Pokémon que pueda hacer Mega Evolución (y que no esté en las listas de arriba). Ese es tu Mega. Los demás Pokémon de tu equipo <strong>no pueden</strong> ser de los que hacen Mega, aunque no lleven su piedra. O sea: una Mega y listo, ni una más. 🙂</p>
       </div>
     </div>
   </section>
