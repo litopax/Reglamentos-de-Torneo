@@ -145,10 +145,11 @@
   .mon.mega{
     grid-column:1 / -1;display:flex;align-items:center;gap:18px;
     text-align:left;padding:16px 22px;
-    background:linear-gradient(90deg, var(--ban-dim), var(--arena-2));
-    border-color:var(--ban);
+    background:linear-gradient(90deg, rgba(255,203,62,.12), var(--arena-2));
+    border-color:var(--gold);
   }
-  .mon.mega:hover{transform:none}
+  .mon.mega:hover{transform:none;border-color:var(--gold)}
+  .mon.mega .name{color:var(--gold)}
   .mega-stone{
     width:56px;height:56px;border-radius:50%;flex-shrink:0;
     background:conic-gradient(from 40deg,#7be3ff,#c96bff,#ffd76b,#7be3ff);
@@ -217,8 +218,8 @@
       <div class="mon mega">
         <div class="mega-stone"></div>
         <div>
-          <div class="name">Cualquier Pokémon con Mega Evolución</div>
-          <p>Todo Pokémon capaz de Mega Evolucionar queda excluido del formato, porte o no su Megapiedra.</p>
+          <div class="name">Regla de las Megas: solo UNA por equipo</div>
+          <p>Es muy fácil: elegí <strong style="color:#fff">un solo</strong> Pokémon que pueda hacer Mega Evolución. Ese es tu Mega. Los demás Pokémon de tu equipo <strong style="color:#fff">no pueden</strong> ser de los que hacen Mega, aunque no lleven su piedra. O sea: una Mega y listo, ni una más. 🙂</p>
         </div>
       </div>
     </div>
